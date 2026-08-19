@@ -22,6 +22,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(amb.root)
 
         with(amb) {
+
+            fun updatePoints() {
+                teamAScoreTv.text = team_a_points.toString()
+                teamBScoreTv.text = team_b_points.toString()
+            }
+
             resetBt.setOnClickListener {
                 team_a_points = 0
                 team_b_points = 0
