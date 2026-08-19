@@ -2,10 +2,7 @@ package br.edu.ifsp.scl.sc3038432.trucoscoreboard
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.sc3038432.trucoscoreboard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private var team_a_points = 1
-    private var team_b_points = 1
+    private var teamAPoints = 1
+    private var teamBPoints = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +20,28 @@ class MainActivity : AppCompatActivity() {
 
         with(amb) {
 
-            fun updatePoints() {
-                teamAScoreTv.text = team_a_points.toString()
-                teamBScoreTv.text = team_b_points.toString()
+            fun updateScoreDisplay() {
+                teamAScoreTv.text = teamAPoints.toString()
+                teamBScoreTv.text = teamBPoints.toString()
+            }
+
+            listOf(
+                // "to" é uma função infixa que cria um Pair de dois valores
+                // cada par associa um botão numa lambda que será executada quando for clicado
+                teamAPlusOneBt to { teamAPoints ++ }, // = Pair(teamAPlusOneBt, { teamAPoints++ })
+                teamBPlusOneBt to { teamBPoints ++ },
+                teamAPlusThreeBt to {teamAPoints += 3},
+                teamBPlusThreeBt to {teamBPoints += 3}
+            ).forEach { (button, action) -> // action é a lambda associada
+                button.setOnClickListener {
+                    action() // executa a lambda
+                    updateScoreDisplay()
+                }
             }
 
             resetBt.setOnClickListener {
-                team_a_points = 0
-                team_b_points = 0
+                teamAPoints = 0
+                teamBPoints = 0
                 listOf(
                     teamAPlusOneBt, teamBPlusOneBt, teamAPlusThreeBt, teamBPlusThreeBt
                 ).forEach { it.visibility = View.VISIBLE }
