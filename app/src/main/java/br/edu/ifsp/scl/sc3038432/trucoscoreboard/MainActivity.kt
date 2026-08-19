@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private var teamAPoints = 1
-    private var teamBPoints = 1
+    private var teamAPoints = 0
+    private var teamBPoints = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             resetBt.setOnClickListener {
                 teamAPoints = 0
                 teamBPoints = 0
+                updateScoreDisplay()
                 listOf(
                     teamAPlusOneBt, teamBPlusOneBt, teamAPlusThreeBt, teamBPlusThreeBt
                 ).forEach { it.visibility = View.VISIBLE }
