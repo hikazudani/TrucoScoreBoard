@@ -4,4 +4,6 @@
     <string name="team_a">Team A</string>
     <string name="reset_score">Reset Score</string>
     <string name="team_b">Team B</string>
+    <string name="plus_1">+ 1</string>
+    <string name="plus_3">+ 3</string>
 </resources>
