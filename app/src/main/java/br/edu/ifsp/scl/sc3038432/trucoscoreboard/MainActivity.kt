@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    private var target = 12
     private var teamAPoints = 0
     private var teamBPoints = 0
 
@@ -34,7 +36,25 @@ class MainActivity : AppCompatActivity() {
                 teamBPlusThreeBt.visibility = View.INVISIBLE
             }
 
+            fun winnerWarning() {
+                Toast.makeText(
+                    this@MainActivity,
+                    "The Winner is: ${if (teamAPoints == target) "Team A" else "Team B"}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
             fun updateScoreDisplay() {
+                if (teamAPoints == target || teamBPoints == target) {
+                    winnerWarning()
+                    appButtons.forEach { it.visibility = View.INVISIBLE }
+                }
+
+                if (teamAPoints > target || teamBPoints > target) {
+                    Toast.makeText(this@MainActivity, "The Game is over!", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 teamAScoreTv.text = teamAPoints.toString()
                 teamBScoreTv.text = teamBPoints.toString()
 
