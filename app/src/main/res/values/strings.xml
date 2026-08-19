@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TrucoScoreBoard</string>
+    <string name="truco_score_board">Truco Score Board</string>
 </resources>
